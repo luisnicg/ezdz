@@ -53,19 +53,13 @@
             return filename;
         }
     };
+    var mainConainter;
 
     $.multi = function(element,options){
-        /*
-        <ul id="sortable">
-          <li class="ui-state-default empty first-child" id='img-1'><input type="file" accept="image/png, image/jpeg"></li>
-          <li class="ui-state-default empty" id='img-2'><input type="file" accept="image/png, image/jpeg"></li>
-          <li class="ui-state-default empty" id='img-3'><input type="file" accept="image/png, image/jpeg"></li>
-          <li class="ui-state-default empty" id='img-4'><input type="file" accept="image/png, image/jpeg"></li>
-          <li class="ui-state-default empty" id='img-5'><input type="file" accept="image/png, image/jpeg"></li>
-        </ul>
-        */
         var myul = $('<ul id="sortable" />');
         myul.appendTo('#'+element.id);
+
+        mainConainter = element.id;
 
         for(var i = 0 ; i < options.multi; i++){
             var $first = '';
@@ -296,10 +290,23 @@
 
                         // The file is validated, so added to input
                         if (valid === true) {
+                            var aux = $ezdz;
+                            $('#'+mainConainter).find('li.empty > div').each(function(){
+                                 $ezdz = $(this);
+                                return false;
+                            });
                             $ezdz.find('img').remove();
 
                             if (isImage && settings.previewImage === true) {
+
                                 $ezdz.find('div').html($(img).fadeIn());
+
+                                $ezdz.find('div').next().css('display','none');
+                                $ezdz.parent().removeClass('empty');
+                                $ezdz.removeClass(settings.classes.enter);
+                                aux.removeClass(settings.classes.enter);
+                                $ezdz.parent().addClass('with-photo');
+
                             } else {
                                 $ezdz.find('div').html('<span>' + formatted + '</span>');
                             }
@@ -369,6 +376,11 @@
         $input.parent('.' + settings.classes.main).replaceWith($input);
         $input.off('*.ezdz');
         $input.removeData('ezdz');
+
+        $('#'+mainConainter+' ul').removeClass('ui-sortable');
+        $('#'+mainConainter+' ul li').removeClass('ui-state-default');
+        $('#'+mainConainter+' ul li').removeClass('empty');
+        $('#'+mainConainter+' ul li').removeClass('first-child');
     };
 
     // Extend settings

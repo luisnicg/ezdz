@@ -27,7 +27,6 @@
         $( "#sortable" ).disableSelection();
     });
     function setFirstImageBoarder(){
-        console.log('sorte');
         $('#multi-ezdz').find('li.empty, li.with-photo').removeClass('first-child');
         $('#multi-ezdz').find('li.with-photo:visible:not(.empty):first').addClass('first-child');
     }
@@ -38,15 +37,17 @@
     <p>Png or Jpeg, max 600x400</p>
 
     <form action="" method="post" enctype="multipart/form-data">
-        <div id="multi-ezdz">
-        </div>
+        <div id="multi-ezdz"></div>
+
+        <div style="clear:both;"></div>
+        <div>If you have problems with flash please use <a href="#" onclick="javascript:$('[type=\'file\']').ezdz('destroy');return false;">simpler form</a></div>
       <input type="submit">
     </form>
 
     <script src="../src/jquery.ezdz.multi.js"></script>
     <script>
         $('#multi-ezdz').multi({
-            multi: 5,
+            multi: 12,
             text: '+',
             validators: {
                 maxWidth:  600,
