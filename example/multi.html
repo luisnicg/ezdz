@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ezdz example</title>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="../src/jquery.ezdz.multi.css">
+    <link rel="stylesheet" href="css/multi.css">
+    <script>
+    $(function() {
+        $( "#sortable" ).sortable({
+            cursor:"move",
+            items:"> li.with-photo",
+            tolerance:"pointer",
+            // distance:5,
+            placeholder: "ui-state-highlight",
+            update: function( event, ui ) {
+                var sorted = $( "#sortable" ).sortable( "serialize", { key: "sort" } );
+                console.log(sorted);
+                //$.post( "form/order.php",{ 'choices[]': sorted});
+            },
+            stop:function(event,ui){
+                setFirstImageBoarder();
+            }
+        });
+        $( "#sortable" ).disableSelection();
+    });
+    function setFirstImageBoarder(){
+        console.log('sorte');
+        $('#multi-ezdz').find('li.empty, li.with-photo').removeClass('first-child');
+        $('#multi-ezdz').find('li.with-photo:visible:not(.empty):first').addClass('first-child');
+    }
+    </script>
+</head>
+<body>
+    <h1>Ezdz example</h1>
+    <p>Png or Jpeg, max 600x400</p>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        <div id="multi-ezdz">
+        </div>
+      <input type="submit">
+    </form>
+
+    <script src="../src/jquery.ezdz.multi.js"></script>
+    <script>
+        $('#multi-ezdz').multi({
+            multi: 5,
+            text: '+',
+            validators: {
+                maxWidth:  600,
+                maxHeight: 400
+            },
+            reject: function(file, errors) {
+                if (errors.mimeType) {
+                    alert(file.name + ' must be an image.');
+                }
+
+                if (errors.maxWidth) {
+                    alert(file.name + ' must be width:600px max.');
+                }
+
+                if (errors.maxHeight) {
+                    alert(file.name + ' must be height:400px max.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

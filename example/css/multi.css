@@ -1,0 +1,42 @@
+#sortable { 
+    list-style-type: none;
+    margin: 0; 
+    padding: 0; 
+    width: 450px; 
+}
+.ui-sortable li { 
+    margin: 3px 3px 3px 3px !important; 
+    padding: 1px; 
+    float: left; 
+    width: 100px; 
+    height: 90px !important; 
+    font-size: 4em; 
+    text-align: center; 
+}
+.ui-state-highlight{ 
+    height: 1.5em;
+    line-height: 1.2em; 
+    border: 1px solid #fcefa1;
+    background: #fbf9ee;
+}
+
+.ui-state-default{
+    cursor: pointer;
+    border: 1px solid #e8f4de;
+    display: block;
+    position: relative;
+    background: #fff;
+}
+.ui-state-default.empty{
+    margin: 0 0 0;
+    background: #f4f4f4;
+    border: 1px dashed #cbd2d7;
+    height: 88px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.ui-state-default.first-child{
+    background: #e8f4de;
+}
